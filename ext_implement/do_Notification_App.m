@@ -7,32 +7,15 @@
 //
 
 #import "do_Notification_App.h"
+static do_Notification_App *instance;
 
 @implementation do_Notification_App
-@synthesize ThridPartyID;
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+@synthesize OpenURLScheme;
++(id) Instance
 {
-    return YES;
-}
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    
-}
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    
-}
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    
-}
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    
-}
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    
+    if(instance==nil)
+        instance = [[do_Notification_App alloc]init];
+    return instance;
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation fromThridParty:(NSString*)_id
 {

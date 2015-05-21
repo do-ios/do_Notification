@@ -10,5 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "doIAppDelegate.h"
 @interface do_Notification_App : NSObject<doIAppDelegate>
++(id) Instance;
 
 @end
