@@ -74,7 +74,7 @@
         _button2text = @"取消";
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        doConfirmView *confirmView = [[doConfirmView alloc]initWithTitle:_title message:_text delegate:self cancelButtonTitle:_button1text otherButtonTitles:_button2text  callbackName:_callbackName scriptEngine:_scritEngine];
+        doConfirmView *confirmView = [[doConfirmView alloc]initWithTitle:_title message:_text delegate:self cancelButtonTitle:_button2text otherButtonTitles:_button1text  callbackName:_callbackName scriptEngine:_scritEngine];
         
         [confirmView show];
     });
