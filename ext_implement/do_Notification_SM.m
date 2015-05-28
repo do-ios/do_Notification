@@ -136,18 +136,18 @@
 
 - (void)alertView:(doConfirmView *)confirmView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSMutableDictionary *_node = [[NSMutableDictionary alloc]init];
+    int index = 0;
     
     if (buttonIndex == confirmView.cancelButtonIndex)
     {
-        [_node setObject:[NSNumber numberWithInt:2] forKey:@"index"];
+        index = 2;
     }
     else
     {
-        [_node setObject:[NSNumber numberWithInt:1] forKey:@"index"];
+        index = 1;
     }
     doInvokeResult *_invokeResult = [[doInvokeResult alloc] init:nil];
-    [_invokeResult SetResultNode: _node];
+    [_invokeResult SetResultInteger:index];
     [confirmView.myScritEngine Callback:confirmView.myCallBackName :_invokeResult];
     [confirmView Dispose];
 }
