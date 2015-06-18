@@ -49,10 +49,16 @@
 - (void)alert:(NSArray *)parms
 {
     NSDictionary *_dictParas = [parms objectAtIndex:0];
+    id<doIScriptEngine> _scritEngine = [parms objectAtIndex:1];
+    NSString *_callbackName = [parms objectAtIndex:2];
+
     NSString *_title = [doJsonHelper GetOneText: _dictParas :@"title" :@"" ];
     NSString *_text = [doJsonHelper GetOneText: _dictParas :@"text" :@"" ];
-    [doUIModuleHelper Alert:_title msg:_text];
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        doConfirmView *confirmView = [[doConfirmView alloc] initWithTitle:_title message:_text delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定"  callbackName:_callbackName scriptEngine:_scritEngine];
+        [confirmView show];
+    });
 }
 - (void)confirm:(NSArray *)parms
 {
