@@ -56,6 +56,7 @@
     NSString *_text = [doJsonHelper GetOneText: _dictParas :@"text" :@"" ];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"ALERT");
         doConfirmView *confirmView = [[doConfirmView alloc] initWithTitle:_title message:_text delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定"  callbackName:_callbackName scriptEngine:_scritEngine];
         [confirmView show];
     });
@@ -113,7 +114,7 @@
         [_showView addSubview:_showLabel];
         [[[UIApplication sharedApplication] keyWindow] addSubview:_showView];
         
-        [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:3.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             _showView.alpha = 0.0;
         } completion:^(BOOL finished) {
             [_showView removeFromSuperview];
