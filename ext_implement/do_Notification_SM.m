@@ -81,7 +81,7 @@
         _button2text = @"取消";
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        doConfirmView *confirmView = [[doConfirmView alloc]initWithTitle:_title message:_text delegate:self cancelButtonTitle:_button2text otherButtonTitles:_button1text  callbackName:_callbackName scriptEngine:_scritEngine];
+        doConfirmView *confirmView = [[doConfirmView alloc]initWithTitle:_title message:_text delegate:self cancelButtonTitle:_button1text otherButtonTitles:_button2text  callbackName:_callbackName scriptEngine:_scritEngine];
         
         [confirmView show];
     });
@@ -147,11 +147,11 @@
     
     if (buttonIndex == confirmView.cancelButtonIndex)
     {
-        index = 2;
+        index = 1;
     }
     else
     {
-        index = 1;
+        index = 2;
     }
     doInvokeResult *_invokeResult = [[doInvokeResult alloc] init:nil];
     [_invokeResult SetResultInteger:index];
