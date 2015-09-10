@@ -82,7 +82,6 @@
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         doConfirmView *confirmView = [[doConfirmView alloc]initWithTitle:_title message:_text delegate:self cancelButtonTitle:_button1text otherButtonTitles:_button2text  callbackName:_callbackName scriptEngine:_scritEngine];
-        
         [confirmView show];
     });
     
@@ -127,6 +126,9 @@
 
 
 @implementation doConfirmView
+{
+    int _clickIndex;
+}
 - (void)Dispose
 {
     _myCallBackName = nil;
@@ -153,8 +155,18 @@
     {
         index = 2;
     }
+    _clickIndex = index;
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self confirmViewCallBack:(doConfirmView *)alertView];
+}
+
+- (void)confirmViewCallBack:(doConfirmView *)confirmView
+{
     doInvokeResult *_invokeResult = [[doInvokeResult alloc] init:nil];
-    [_invokeResult SetResultInteger:index];
+    [_invokeResult SetResultInteger:_clickIndex];
     [confirmView.myScritEngine Callback:confirmView.myCallBackName :_invokeResult];
     [confirmView Dispose];
 }
