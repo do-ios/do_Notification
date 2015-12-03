@@ -94,10 +94,8 @@
     CGFloat xZoom =  _scritEngine.CurrentPage.RootView.XZoom;
     CGFloat yZoom = _scritEngine.CurrentPage.RootView.YZoom;
     NSString *_text = [doJsonHelper GetOneText: _dictParas :@"text" :@"" ];
-    __block NSInteger x = [doJsonHelper GetOneInteger:_dictParas :@"x" :0];
-    __block NSInteger y = [doJsonHelper GetOneInteger:_dictParas :@"y" :0];
-    x *= xZoom;
-    y *= yZoom;
+    __block NSInteger x = [doJsonHelper GetOneInteger:_dictParas :@"x" :-1];
+    __block NSInteger y = [doJsonHelper GetOneInteger:_dictParas :@"y" :-1];
     dispatch_async(dispatch_get_main_queue(), ^{
         CGRect _frame = [[UIScreen mainScreen]bounds];
         
@@ -106,8 +104,18 @@
         CGSize _strsize = [_text boundingRectWithSize:CGSizeMake(_frame.size.width*0.75, CGFLOAT_MAX) options:_drawingOptions attributes:_attributeDict context:nil].size;
         UIView *_mainView = [[UIView alloc] initWithFrame:_frame];
         float _tostWidth = 200;
-        if (x == 0 && y == 0) {
+        if (x >=0 && x <= _frame.size.width) {
+            x *= xZoom;
+        }
+        else
+        {
             x = (_mainView.frame.size.width-(_tostWidth+20))/2;
+        }
+        if (y >= 0 && y <= _frame.size.height) {
+            y *= yZoom;
+        }
+        else
+        {
             y = (_mainView.frame.size.height-(_strsize.height+20)-40);
         }
         UIView *_showView = [[UIView alloc] initWithFrame:CGRectMake(x,y, _tostWidth+20, _strsize.height+20)];
