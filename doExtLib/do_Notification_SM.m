@@ -104,15 +104,17 @@
         CGSize _strsize = [_text boundingRectWithSize:CGSizeMake(_frame.size.width*0.75, CGFLOAT_MAX) options:_drawingOptions attributes:_attributeDict context:nil].size;
         UIView *_mainView = [[UIView alloc] initWithFrame:_frame];
         float _tostWidth = 200;
+        x *= xZoom;
         if (x >=0 && x <= _frame.size.width) {
-            x *= xZoom;
+            
         }
         else
         {
             x = (_mainView.frame.size.width-(_tostWidth+20))/2;
         }
+        y *= yZoom;
         if (y >= 0 && y <= _frame.size.height) {
-            y *= yZoom;
+
         }
         else
         {
