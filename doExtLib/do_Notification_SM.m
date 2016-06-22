@@ -14,6 +14,8 @@
 #import "doUIModuleHelper.h"
 #import "doJsonHelper.h"
 #import "doIPage.h"
+#import "doServiceContainer.h"
+#import "doIGlobal.h"
 
 @implementation do_Notification_SM
 #pragma mark -
@@ -91,6 +93,8 @@
 {
     NSDictionary *_dictParas = [parms objectAtIndex:0];
     id<doIScriptEngine> _scritEngine = [parms objectAtIndex:1];
+    id<doIPage>pageModel = _scritEngine.CurrentPage;
+    UIViewController *currentVC = (UIViewController *)pageModel.PageView;
     CGFloat xZoom =  _scritEngine.CurrentPage.RootView.XZoom;
     CGFloat yZoom = _scritEngine.CurrentPage.RootView.YZoom;
     NSString *_text = [doJsonHelper GetOneText: _dictParas :@"text" :@"" ];
@@ -104,8 +108,9 @@
             y = [doJsonHelper GetOneInteger:_dictParas :@"y" :-1];
             
         }
-        CGRect _frame = [[UIScreen mainScreen]bounds];
-        
+        CGFloat screenWidth = [doServiceContainer Instance].Global.ScreenWidth;
+        CGFloat screenHeight = [doServiceContainer Instance].Global.ScreenHeight;
+        CGRect _frame = CGRectMake(0, 0, screenWidth, screenHeight);
         NSDictionary *_attributeDict = @{NSFontAttributeName: [UIFont systemFontOfSize:12]};
         NSStringDrawingOptions _drawingOptions = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
         CGSize _strsize = [_text boundingRectWithSize:CGSizeMake(_frame.size.width*0.75, CGFLOAT_MAX) options:_drawingOptions attributes:_attributeDict context:nil].size;
@@ -138,7 +143,7 @@
         _showLabel.textAlignment = 1;
         _showLabel.backgroundColor = [UIColor clearColor];
         [_showView addSubview:_showLabel];
-        [[[UIApplication sharedApplication] keyWindow] addSubview:_showView];
+        [currentVC.view addSubview:_showView];
         
         [UIView animateWithDuration:3.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             _showView.alpha = 0.0;
