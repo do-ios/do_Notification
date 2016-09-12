@@ -117,7 +117,7 @@
         UIView *_mainView = [[UIView alloc] initWithFrame:_frame];
         float _tostWidth = 200;
 
-        if (x >=0 && x <= _frame.size.width) {
+        if (x >=0 && x <= _frame.size.width/xZoom) {
             x = x * xZoom;
         }
         else
@@ -125,7 +125,7 @@
             x = (_mainView.frame.size.width-(_tostWidth+20))/2;
         }
 
-        if (y >= 0 && y <= _frame.size.height) {
+        if (y >= 0 && y <= _frame.size.height/yZoom) {
             y = y * yZoom;
         }
         else
