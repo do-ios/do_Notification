@@ -57,10 +57,11 @@
     
     NSString *_title = [doJsonHelper GetOneText: _dictParas :@"title" :@"" ];
     NSString *_text = [doJsonHelper GetOneText: _dictParas :@"text" :@"" ];
+    NSString *buttontext = [doJsonHelper GetOneText:_dictParas :@"buttontext" :@"确定"];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"ALERT");
-        doConfirmView *confirmView = [[doConfirmView alloc] initWithTitle:_title message:_text delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定"  callbackName:_callbackName scriptEngine:_scritEngine];
+        doConfirmView *confirmView = [[doConfirmView alloc] initWithTitle:_title message:_text delegate:self cancelButtonTitle:nil otherButtonTitles:buttontext  callbackName:_callbackName scriptEngine:_scritEngine];
         [confirmView show];
     });
 }

@@ -86,6 +86,14 @@
           "Required": 0,
           "DefaultValue": "",
           "Description": "alert窗口的标题"
+        },
+        {
+          "ID": "buttontext",
+          "Name": "按钮的文本",
+          "Type": "String",
+          "DefaultValue": "确定",
+          "Required": 0,
+          "Description": "按钮的正文"
         }
       ]
     },
